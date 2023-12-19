@@ -1,0 +1,72 @@
+{% extends "todoapp/base.html" %}
+
+{% block page_header %}
+<h2>{{ date.title|date:"d F" }}</h2>
+{% endblock page_header %}
+
+{% block content %}
+<p>
+  <a href="{% url 'todoapp:new_entry' date.id %}">Add new task</a>
+</p>
+{% for entry in entries %}
+  <form action="{% url 'todoapp:update_entry' entry.id %}" method="post">
+    {% csrf_token %}
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center
+          {% if entry.priority == 'High' %}
+              bg-danger text-white
+          {% elif entry.priority == 'Medium' %}
+              bg-warning text-white
+          {% elif entry.priority == 'Low' %}
+              bg-success text-white
+          {% endif %}">
+        <div class="d-flex justify-content-between w-100">
+          <h4 class="mb-0">{{ entry.title }}
+            <input class="my_checkbox" type="checkbox" name="is_done" value="True" {% if entry.is_done %} checked {% endif %} readonly>
+          </h4>
+          <a href="{% url 'todoapp:upload_image' entry.id %}" class="btn btn-primary ml-3 btn-done">Done</a>
+        </div>
+      </div>
+      <div class="card-body pt-0 pb-1">
+        <p>
+          {{ entry.description|linebreaks }}
+        </p>
+        <div class="text-right">
+          <a href="{% url 'todoapp:edit_entry' entry.id %}" class="edit-link">edit</a>
+        </div>
+      </div>
+    </div>
+  </form>
+{% empty %}
+<p>There are no tasks for this date yet.</p>
+{% endfor %}
+
+
+<div class="modal" id="deleteDateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this date and all its entries?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'todoapp:delete_date' date.id %}" method="post">
+          {% csrf_token %}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Delete date</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#deleteDateModal">
+  Delete date
+</button>
+
+{% endblock content %}

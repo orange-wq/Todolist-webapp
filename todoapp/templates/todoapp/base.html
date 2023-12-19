@@ -1,0 +1,103 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink_to_fit=no">
+    <title>ToDoApp</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <link rel="icon" href="{% static 'images/calendar.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+</head>
+<body class="d-flex flex-column h-100" >
+    <div class="wrapper">
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+        <i class="far fa-calendar-check mr-1"></i>
+        <a class="navbar-brand" href="{% url 'todoapp:index' %}">ToDoApp</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+     <div class="collapse navbar-collapse" id="navbarCollapse">
+         <ul class="navbar-nav mr-auto">
+             <li class="nav-item">
+                 <a class="nav-link" href="{% url 'todoapp:dates' %}">Tasks</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="{% url 'todoapp:completed_dates' %}">Completed Tasks</a>
+             </li>
+         </ul>
+         <ul class="navbar-nav ml-auto">
+             {% if user.is_authenticated %}
+               <li class="nav-item">
+                   <span class="navbar-text">Hello,
+                       <a class="username" href="{% url 'users:profile' %}">{{ user.username }}</a></span>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+               </li>
+             {% else %}
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+               </li>
+             {% endif %}
+         </ul>
+     </div>
+
+    </nav>
+
+<main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</main>
+
+<div class="bg-light footer text-center #212529 py-30">
+  <div class="container">
+  <div class="text-center p-3">
+      <i class="far fa-calendar-check"></i>
+      ToDoApp by orange-wq
+  </div>
+    <section>
+        <div class="social-icons">
+            <a href="https://t.me/userincorp">
+                <i class="fab fa-telegram" style="font-size: 28px; color: #212529;"></i>
+            </a>
+
+            <style>
+                a {
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    text-decoration: none;
+                }
+            </style>
+
+            <a href="https://github.com/orange-wq">
+                <i class="fab fa-github" style="font-size: 28px; color: #212529;"></i>
+            </a>
+
+
+            <a href="https://vk.com/tsengel.bator">
+                <i class="fab fa-vk" style="font-size: 28px; color: #212529;"></i>
+            </a>
+        </div>
+    </section>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+.form-control.is-valid{
+    border-color: #bd2130;
+    background-image: none;
+}
+
+html, body {
+    position: relative;
+    height: 100%;
+}
+
+.wrapper{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex: 1 1 auto;
+}
+
+
+
+.container{
+    padding: 0 0 15px;
+}
+
+.social-icons i{
+    margin-right: 10px;
+}
+
+input[type="checkbox"][readonly] {
+  pointer-events: none;
+  opacity: 1;
+}
+
+.btn-done{
+    color: #fff;
+    background-color: rgba(0,0,0,.075);
+    border-color: rgba(0,0,0,.075);
+}
+
+.btn-delete{
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.jumbotron-centered{
+    margin-top: 50px;
+}
+
+.navbar-light .navbar-text a {
+    color: rgb(0 0 0 / 50%);
+}

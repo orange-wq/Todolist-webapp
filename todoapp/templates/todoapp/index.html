@@ -1,0 +1,23 @@
+{% extends "todoapp/base.html" %}
+
+{% block page_header %}
+
+    <div class="jumbotron jumbotron-centered">
+        <h1 class="display-3">Track your daily tasks</h1>
+
+        <p class="lead">TodoApp is a versatile task management application that offers numerous benefits to its users.
+            This app provides a straightforward and efficient way to organize tasks, set priorities,
+            and ensure nothing important is overlooked. With features like creating, editing, and deleting tasks,
+            it streamlines the daily task management process.</p>
+        {% if user.is_authenticated %}
+            <a class="btn btn-lg btn-primary" href="{% url 'todoapp:dates' %}" role="button">
+                Start &raquo;</a>
+        {% else %}
+            <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">
+                Register &raquo;</a>
+        {% endif %}
+
+    </div>
+
+{% endblock page_header %}
+

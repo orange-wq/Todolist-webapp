@@ -1,0 +1,22 @@
+{% extends "todoapp/base.html" %}
+
+{% block page_header %}
+<h1>Dates</h1>
+{% endblock page_header %}
+
+
+{% block content %}
+
+<ul>
+    {% for date in dates %}
+      <li><h3>
+          <a href="{% url 'todoapp:date' date.id %}">{{ date.title|date:"d F" }}</a>
+      </h3></li>
+    {% empty %}
+    <li><h3>No dates have been added yet.</h3></li>
+    {% endfor %}
+</ul>
+
+<h3><a href="{% url 'todoapp:new_date' %}">Add new date</a></h3>
+
+{% endblock content %}

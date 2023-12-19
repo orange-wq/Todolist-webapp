@@ -1,0 +1,12 @@
+{% extends "todoapp/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit" class="btn btn-success">Upload image</button>
+</form>
+
+{% endblock content %}

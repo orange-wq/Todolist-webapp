@@ -1,0 +1,26 @@
+{% extends "todoapp/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block page_header %}
+<h2>Add new date</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<form action="{% url 'todoapp:new_date' %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">submit</button>
+    {% endbuttons %}
+</form>
+{% if errors %}
+<div class="alert alert-danger" role="alert">
+  <strong>Error</strong> This date already exists.
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
