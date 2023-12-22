@@ -1,5 +1,5 @@
 Welcome to web application created with Django and styled using Bootstrap 4. It's a powerful tool that allows easy management of your records and images.
-
+http://bator.pythonanywhere.com
 Features:
 Record Management:
 Create, modify, and delete records to organize tasks, save important moments, or simply share your ideas.
